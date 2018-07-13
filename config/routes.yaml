@@ -27,6 +27,10 @@ security_register:
     path: /register
     controller: App\Controller\SecurityController::register
 
+security_two_step_validation:
+    path: /security_two_step_validation
+    controller: App\Controller\SecurityController::two_step_validation
+
 security_account_validation:
     path: /account_validation/{id}/{token}
     controller: App\Controller\SecurityController::account_validation

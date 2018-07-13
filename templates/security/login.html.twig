@@ -5,11 +5,6 @@
 
 
 {% block body %}
-{% if error %}
-<div class="alert alert-danger">
-    {{ error.messageKey|trans(error.messageData, 'security') }}
-</div>
-{% endif %}
 
 <div class="container-fluid">
     <div class="row justify-content-center align-items-center flex-row mh-100 justify-content-center">
@@ -22,6 +17,12 @@
                                 <legend class="pb-4">
                                     {{ 'title.login'|trans }}
                                 </legend>
+                                
+                                {% if error %}
+                                <div class="alert alert-danger">
+                                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                                </div>
+                                {% endif %}
                                 <p class="text-muted">Sign In to your account</p>
                                 <div class="form-group">
                                     <!--label for="username">{{ 'label.username'|trans }}</label-->

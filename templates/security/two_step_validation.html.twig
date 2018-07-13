@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id %}register{% endblock %}
+{% block body_class %}register-bg{% endblock %}
+
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center flex-row mh-100 justify-content-center">
+        <div class="col-lg-6">
+            <div class="card p-4">
+                <div class="card-body">
+                    <h1>Account validation</h1>
+                    <p>
+                        An email has been sent to you. Please check your mailbox to verify and activate your account !
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script>
+</script>
+{% endblock %}
