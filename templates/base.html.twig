@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     {% endblock %}
 </head>
-<body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %} mh-100">
+<body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
 
 
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container-fluid h-100">
+        <div class="h-100 row">
             {% block body %}{% endblock %}
 
             {% block javascripts %}

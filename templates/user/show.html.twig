@@ -53,7 +53,7 @@
             </tr>
             <tr>
                 <th>Roles</th>
-                <td>{{ user.roles }}</td>
+                <td>{{ user.roles|join(', ') }}</td>
             </tr>
         </tbody>
     </table>
