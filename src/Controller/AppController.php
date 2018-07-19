@@ -39,8 +39,13 @@ class AppController extends AbstractController
     }
 
 
-    public function homepage(): Response
-    {
+    /**
+     * @Route("/", name="app_homepage")
+     */
+    public function home(): Response
+    {   
+
+
         return $this->render('app/homepage.html.twig', [
             
         ]);

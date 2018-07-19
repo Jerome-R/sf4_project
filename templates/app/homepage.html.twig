@@ -1,5 +1,5 @@
 {% extends 'app/index.html.twig' %}
 
 {% block main %}
-    This is a homepage
+    {{ 'homepage.text'|trans }} {{dump(app.request)}}
 {% endblock %}

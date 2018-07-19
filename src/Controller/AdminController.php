@@ -26,6 +26,9 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 */
 class AdminController extends AbstractController
 {
+    /**
+     * @Route("/admin/", name="app_admin_dashbord")
+     */
     public function admin(AuthenticationUtils $helper, AuthorizationCheckerInterface $authChecker): Response
     {
         if (false === $authChecker->isGranted('ROLE_ADMIN')) {

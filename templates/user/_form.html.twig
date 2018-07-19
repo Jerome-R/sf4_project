@@ -1,4 +1,14 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+ {{ form_start(form, {'attr' : {'class' : 'needs-validation', 'novalidate' : ''}}) }}
+ <fieldset>
+
+ 	{% include '/share/admin/_admin_form_input.html.twig' with {'type' : 'text', 'field': 'username', 'icon' : 'fa-user'} %}
+ 	{% include '/share/admin/_admin_form_input.html.twig' with {'type' : 'text', 'field': 'fullName', 'icon' : 'fa-user'} %}
+ 	{% include '/share/admin/_admin_form_input.html.twig' with {'type' : 'text', 'field': 'email', 'icon' : 'fa-at'} %}
+ 	{% include '/share/admin/_admin_form_input.html.twig' with {'type' : 'text', 'field': 'roles', 'icon' : 'fa-users'} %}
+ 	{% include '/share/admin/_admin_form_input.html.twig' with {'type' : 'checkbox', 'field': 'isActive'} %}
+ 	{% include '/share/admin/_admin_form_input.html.twig' with {'type' : 'datepicker', 'field' : 'credentialExpireAt'} %}
+
+ 	{% include '/share/admin/_admin_form_input.html.twig' with {'type' : 'repeat', 'field': 'plainPassword', 'icon' : 'fa-lock', 'icon2' : 'fa-eye'} %}
+
+ </fieldset>
+ {{ form_end(form) }}

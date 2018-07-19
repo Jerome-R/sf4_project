@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Symfony4 Project!{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+    {% endblock %}
+    
+    {% block javascripts %}
+        <script src="{{ asset('build/js/app.js') }}"></script>
+    {% endblock %}
+</head>
+<body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
+    <div class="container-fluid">
+        <div class="row">
+            {% if app.request.attributes.get('_route') not in ['security_login'] %}
+                <aside id="sidebar_admin" class="h-100 col-12 col-md-2 p-0 bg-dark fixed-md">
+                    <nav class="navbar navbar-expand navbar-dark bg-dark flex-md-column flex-row align-items-start p-0">
+                        <div class="collapse navbar-collapse w-100">
+                            <ul class="flex-md-column flex-row navbar-nav justify-content-start w-100 flex-wrap">
+                                <li class="nav-item">
+                                    <a class="nav-link px-2 text-nowrap" href="#"><span class="">Dashboard</span></a>
+                                </li>
+
+                                {% include '/share/admin/_admin_menu_li.html.twig' with {'entity': 'user', 'icon' : 'user'} %}
+
+                                {% include '/share/admin/_admin_menu_li.html.twig' with {'entity': 'user', 'icon' : 'user'} %}
+
+                            </ul>
+                        </div>
+                    </nav>
+                </aside>
+            {% endif %}
+            <main  id="{% block main_id %}{% endblock %}" class="{% block main_class %}{% endblock %} col-md-10 col-xs-12 bg-faded py-3 pl-4 h-100 ml-md-auto">
+                {% block main %}
+                {% endblock %}
+            </main>
+        </div>
+    </div>
+</body>
+</html>

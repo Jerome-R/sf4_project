@@ -1,0 +1,100 @@
+{#  
+    Tempalte for admin menu list itmes
+    @var string $field
+    @var string $icon
+
+    call :
+    {% include '/share/admin/_admin_form_input.html.twig' with {'type' : 'text', 'field': 'username', 'icon' : 'user'} %}
+#}
+
+{% if type == 'text' %}
+
+	<div class="form-group">
+		{% for error in errors %}
+			{% if error.propertyPath == '{{ field }}' %}
+				<div class="alert alert-danger">
+					{{ error.message }}
+				</div>
+			{% endif %}
+		{% endfor %}
+		<label for="{{ field }}">{{ ('label.'~ field)|trans }}</label>
+		<div class="input-group mb-3">
+			<div class="input-group-append">
+				<span class="input-group-text" id="{{ field }}_field"><i class="fas {{ icon }}"></i></span>
+			</div>
+			{{ form_widget(form[field] , { 'attr': {'class' : 'form-control', 'placeholder' : 'label.'~ field|trans, 'aria-label' : ('label.'~ field)|trans, 'aria-describedby' : field~'_field' } }) }}
+			<div class="invalid-feedback">
+				Please provide a valid {{ field|capitalize }}
+			</div>
+		</div>
+	</div>
+
+{% elseif type == 'checkbox' %}
+	<div class="form-group py-2">
+		<div class="form-check">
+			{{ form_widget(form[field] , { 'attr': {'class' : 'form-check-input', 'aria-label' : 'label.'~ field|trans, 'aria-describedby' : '{{ field }}_field' } }) }}
+			<label class="form-check-label" for="{{ field }}">{{ ('label.'~ field)|trans }}</label>
+		</div>
+	</div>
+
+{% elseif type == 'datepicker' %}
+	<div class="form-group">
+		<div class="input-group mb-3" id="datetimepicker1" data-target-input="nearest">
+			{{ form_widget(form[field], { 'attr': {'class' : 'form-control datetimepicker-input', 'placeholder' : ('label.'~ field)|trans, 'data-target' : '#datetimepicker1' } }) }}
+			<div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+				<div class="input-group-text">
+					<i class="fa fa-calendar-alt"></i>
+				</div>
+			</div>
+			<script type="text/javascript">
+	            $(document).ready(function() {
+	                $('#datetimepicker1').datetimepicker({
+	                    locale: '{{ app.request.locale }}',
+	                });
+	            });
+	        </script>
+		</div>
+	</div>
+
+
+{% elseif type == 'repeat' %}
+
+	<div class="form-group">
+ 		{% for error in errors %}
+ 			{% if error.propertyPath == 'plainPassword' %}
+ 				<div class="alert alert-danger">
+ 					{{ error.message }}
+ 				</div>
+ 			{% endif %}
+ 		{% endfor %}
+ 		<label for="password">{{ 'label.password'|trans }}</label>
+ 		<div class="input-group mb-3">
+ 			<div class="input-group-append">
+ 				<span class="input-group-text" id="{{ field }}_field"><i class="fa {{ icon }}" aria-hidden="true"></i></span>
+ 			</div>
+ 			{{ form_widget(form[field].first, { 'attr': {'class' : 'form-control', 'placeholder' : ('label.'~ field)|trans, 'aria-label' : ('label.'~ field)|trans, 'aria-describedby' : field~'_field' } }) }}
+ 			<div class="input-group-append">
+ 				<span data="hidden" type="text" class="input-group-text btn visible_pwd"><i class="fa {{ icon2 }}" aria-hidden="true"></i></span>
+ 			</div>
+ 			<div class="invalid-feedback">
+ 				Please provide a valid Password
+ 			</div>
+ 		</div>
+ 	</div>
+
+ 	<div class="form-group">
+ 		<div class="input-group mb-3">
+ 			<div class="input-group-append">
+ 				<span class="input-group-text" id="{{ field }}_field"><i class="fa {{ icon }}" aria-hidden="true"></i></span>
+ 			</div>
+ 			{{ form_widget(form[field].second, { 'attr': {'class' : 'form-control', 'placeholder' : ('label.'~ field ~'_repeat')|trans, 'aria-label' : ('label.'~ field)|trans, 'aria-describedby' : field~'_field' } }) }}
+ 			<div class="input-group-append">
+ 				<span data="hidden" type="text" class="input-group-text btn visible_pwd"><i class="fa {{ icon2 }}" aria-hidden="true"></i></span>
+ 			</div>
+ 			<div class="invalid-feedback">
+ 				Please provide a valid Password
+ 			</div>
+ 		</div>
+ 	</div>
+
+{% endif %}

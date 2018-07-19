@@ -4,24 +4,14 @@
 
 # the "app_lucky_number" route name is not important yet
 
-# Routes home
-homepage:
-    path: /
-    controller: App\Controller\AppController::homepage
-
-# Routes Admin
-admin:
-    path: /admin
-    controller:  App\Controller\AdminController::admin
-
 # Routes security
-security_login:
-    path: /login
-    controller:  App\Controller\SecurityController::login
+#security_login:
+#    path: /login
+#    controller:  App\Controller\SecurityController::login
 
-security_logout:
-    path: /logout
-    controller:  App\Controller\SecurityController::logout
+#security_logout:
+    #path: /logout
+    #controller:  App\Controller\SecurityController::logout
 
 security_register:
     path: /register
@@ -34,3 +24,10 @@ security_two_step_validation:
 security_account_validation:
     path: /account_validation/{id}/{token}
     controller: App\Controller\SecurityController::account_validation
+
+#en_redirect:
+    #path: /en
+    #controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    #defaults:
+        #path: /
+        #permanent: true

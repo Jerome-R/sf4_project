@@ -1,6 +1,7 @@
  // yarn add @symfony/webpack-encore --dev
 
 var Encore = require('@symfony/webpack-encore');
+var webpack = require('webpack');
 
 Encore
     // the project directory where compiled assets will be stored
@@ -15,7 +16,9 @@ Encore
     // uncomment to define the assets of the project
     // yarn add bootstrap-sass --dev
     .addEntry('js/app', './assets/js/main.js')
-    .addStyleEntry('css/app', './assets/css/global.scss')
+    .addStyleEntry('css/app', './assets/scss/global.scss')
+
+    //.addPlugin( new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/))
 
     // uncomment if you use Sass/SCSS files
     // yarn add --dev sass-loader node-sass

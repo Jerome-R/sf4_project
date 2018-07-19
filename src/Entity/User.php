@@ -145,6 +145,13 @@ class User implements UserInterface, \Serializable
      */
     private $roles = [];
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true, options={"default" : "en"})
+     */
+    private $language;
+
     public function __construct() {
         $this->username = "";
         $this->email = "";
@@ -154,6 +161,7 @@ class User implements UserInterface, \Serializable
         $this->updatedAt = null;
         $this->credentialExpireAt = null;
         $this->token = null;
+        $this->language = 'en';
     }
 
     public function getId(): int
@@ -166,7 +174,7 @@ class User implements UserInterface, \Serializable
         $this->fullName = $fullName;
     }
 
-    public function getFullName(): string
+    public function getFullName(): ?string
     {
         return $this->fullName;
     }
@@ -211,7 +219,7 @@ class User implements UserInterface, \Serializable
         $this->password = $password;
     }
 
-    public function getIsActive(): bool
+    public function getIsActive(): ?bool
     {
         return $this->isActive;
     }
@@ -385,5 +393,23 @@ class User implements UserInterface, \Serializable
         $this->token = $token;
 
         return $this;
+    }
+
+    public function getLanguage(): ?string
+    {
+        return $this->language;
+    }
+
+    public function setLanguage(?string $language): self
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    public function hasRole(?string $role) : boolean
+    {
+        if( in_array($role, $this->roles) ) return true;
+        else return false;
     }
 }

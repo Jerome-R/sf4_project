@@ -20,11 +20,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Service\MailBuilder;
 use App\Service\RandomString;
 
-use App\Form\UserType;
+use App\Form\UserRegisterType;
 use App\Entity\User;
 
 /**
@@ -35,53 +36,73 @@ use App\Entity\User;
 */
 class SecurityController extends AbstractController
 {
-/**
-* @var ValidatorInterface
-*/
-private $validator;
+    /**
+    * @var ValidatorInterface
+    */
+    private $validator;
 
-/**
-* @var MailBuilder
-*/
-private $mail_builder;
+    /**
+    * @var MailBuilder
+    */
+    private $mail_builder;
 
-/**
-* @var RandomString
-*/
-private $random_string;
+    /**
+    * @var RandomString
+    */
+    private $random_string;
 
-public function __construct(ValidatorInterface $validator, MailBuilder $mail_builder, RandomString $random_string)
-{
-    $this->validator = $validator;
-    $this->mail_builder = $mail_builder;
-    $this->random_string = $random_string;
-}
+    /**
+    * @var Security
+    */
+    private $security;
 
-/**
-* Login Page
-*/
-public function login(AuthenticationUtils $helper): Response
-{
-    return $this->render('security/login.html.twig', [
-// last username entered by the user (if any)
-        'last_username' => $helper->getLastUsername(),
-// last authentication error (if any)
-        'error' => $helper->getLastAuthenticationError(),
-    ]);
-}
+    /**
+    * @var User
+    */
+    private $user;
 
-/**
-* Logout
-* This is the route the user can use to logout.
-*
-* But, this will never be executed. Symfony will intercept this first
-* and handle the logout automatically. See logout in app/config/security.yml
-*
-*/
-public function logout(): void
-{
-    throw new \Exception('This should never be reached!');
-}
+    public function __construct(ValidatorInterface $validator, MailBuilder $mail_builder, RandomString $random_string, Security $security)
+    {
+        $this->validator = $validator;
+        $this->mail_builder = $mail_builder;
+        $this->random_string = $random_string;
+        $this->security = $security;
+        $this->user = $this->security->getUser();
+    }
+    /**
+     * Login Page
+     * @Route("/login", name="security_login")
+     */
+    public function login(AuthenticationUtils $helper): Response
+    {
+        if($this->user != null) {
+            return $this->redirectToRoute('app_homepage');
+        }
+
+        return $this->render('security/login.html.twig', [
+            // last username entered by the user (if any)
+            'last_username' => $helper->getLastUsername(),
+            // last authentication error (if any)
+            'error' => $helper->getLastAuthenticationError(),
+        ]);
+    }
+
+    /**
+    * Logout
+    * This is the route the user can use to logout.
+    *
+    * But, this will never be executed. Symfony will intercept this first
+    * and handle the logout automatically. See logout in app/config/security.yml
+    *
+    */
+    /**
+     * Login Page
+     * @Route("/logout", name="security_logout")
+     */
+    public function logout(): void
+    {
+        throw new \Exception('This should never be reached!');
+    }
 
     /**
     * Regiter page
@@ -90,7 +111,7 @@ public function logout(): void
     {
         // 1) build the form
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserRegisterType::class, $user);
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);

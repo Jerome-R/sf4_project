@@ -1,0 +1,18 @@
+#
+
+title.login: Se connecter
+title.sign_up: S'inscrire
+
+label.username: Nom d'utilisateur
+label.email: Email
+label.password: Mot de passe
+label.password_repeat: Répéter le mot de passe
+
+action.sign_in: Se connecter
+action.sign_up: S'inscrire
+action.forgot_pwd: Mot de passe oublié
+action.register: S'inscrire
+action.create_account: Créer un compte
+action.delete.confirm: Êtes vous sur de vouloir supprimer l\'objet ?
+
+homepage.text: Ceci est la page d'accueil

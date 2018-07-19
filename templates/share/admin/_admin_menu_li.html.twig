@@ -1,0 +1,37 @@
+{#  
+    Tempalte for admin menu list itmes
+    @var string $entity
+    @var string $icon
+
+    call :
+    {% include '/share/admin/_admin_menu_li.html.twig' with {'entity': 'user', 'icon' : 'user'} %}
+#}
+
+{% set admin_user_routes = ['admin_'~ entity ~'_index','admin_'~ entity ~'_show','admin_'~ entity ~'_edit','admin_'~ entity ~'_new'] %}
+{% set admin_user_routes1 = ['admin_'~ entity ~'_index','admin_'~ entity ~'_new'] %}
+{% set admin_user_routes2 = 'admin_'~ entity ~'_index' %}
+{% set admin_user_routes3 = 'admin_'~ entity ~'_new' %}
+{% set sub_menu_id = entity ~ '_menu' %}
+{% set icon = 'fa-' ~ icon %}
+
+
+<li class="nav-item dropdown">
+    <a 
+    class="nav-link {% if app.request.get('_route') in admin_user_routes %}active{% endif %}"
+    data-toggle="collapse" href="#{{ sub_menu_id }}" role="button"
+    aria-expanded="{% if app.request.get('_route') in admin_user_routes %}true{% else %}false{% endif %}"
+    aria-controls="{{ sub_menu_id }}">
+        <i class="fa {{icon}} fa-fw"></i> <span class="d-none d-md-inline">{{ entity|capitalize }}</span> <i class="fa fa-caret-left fa-fw float-right d-none d-md-block mt-1"></i>
+    </a>
+
+    <div class="collapse {% if app.request.get('_route') in admin_user_routes %}show{% endif %}" id="{{sub_menu_id}}">
+        <ul class="flex-md-column flex-row navbar-nav justify-content-around">
+            <li class="nav-item">
+                <a class="nav-link px-xs-2 px-md-4 {% if app.request.get('_route') == admin_user_routes2 %}active{% endif %}" href="{{ path(admin_user_routes2) }}"><i class="far fa-folder-open fa-fw"></i> List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-xs-2 px-md-4 {% if app.request.get('_route') == admin_user_routes3 %}active{% endif %}" href="{{ path(admin_user_routes3) }}"><i class="far fa-file-alt fa-fw"></i> New</a>
+            </li>
+        </ul>
+    </div>
+</li>

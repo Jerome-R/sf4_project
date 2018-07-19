@@ -1,25 +1,14 @@
 // main.js
 
-//var $ = require('jquery');
-// require jQuery normally
-const $ = require('jquery');
-// create global $ and jQuery variables
-global.$ = global.jQuery = $;
 
-
-// JS is equivalent to the normal "bootstrap" package
-// no need to set this to a variable, just require it
+// require the JavaScript node module
+// add window. to be be able to use libraries
+window.$ = window.jQuery = require('jquery');
+window.moment = require('moment');
 require('bootstrap');
 
-// require the JavaScript
-//require('bootstrap-star-rating');
-// require 2 CSS files needed
-//require('bootstrap-star-rating/css/star-rating.css');
-//require('bootstrap-star-rating/themes/krajee-svg/theme.css');
-
-// or you can include specific pieces
-// require('bootstrap-sass/javascripts/bootstrap/tooltip');
-// require('bootstrap-sass/javascripts/bootstrap/popover');
+// require the JavaScript assets module
+require('./temporusdominus.js');
 
 $(document).ready(function() {
     //$('[data-toggle="popover"]').popover();
@@ -35,6 +24,20 @@ $(document).ready(function() {
             $(this).children('i').removeClass('fa-eye-slash').addClass('fa-eye');
             $(this).attr('data','hidden')
             $(this).parent().prev('input').attr('type','password');
+        }
+    });
+
+
+
+    // Change arrow on menu collapse
+    $(".nav-link.active").children('i.fa-caret-left').removeClass('fa-caret-left').addClass('fa-caret-down');
+    
+    $('.nav-link').on('click', function(event){
+        if( $(this).attr('aria-expanded') == "true"){
+            $(this).children('i.fa-caret-down').removeClass('fa-caret-down').addClass('fa-caret-left');
+        }
+        else{
+            $(this).children('i.fa-caret-left').removeClass('fa-caret-left').addClass('fa-caret-down');
         }
     });
 

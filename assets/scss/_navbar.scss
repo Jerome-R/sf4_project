@@ -1,0 +1,38 @@
+/*
+ * NavBar
+ */
+
+.fixed-md{
+ 	position: fixed;
+ 	top: 0;
+ 	left: 0;
+ 	bottom: 0;
+ 	z-index: 999;
+}
+
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+.dropdown > .dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+    pointer-events: none;
+}
+
+
+
+#sidebar_admin {
+	.nav-item a.active{
+		background: rgba(255,255,255,0.2);
+	}	
+	.nav-item a:hover{
+		background: rgba(255,255,255,0.4);
+	}
+}
+
+
+
+@media (max-width: 768px) { 
+	.fixed-md {
+		position: relative !important;
+	}
+}
