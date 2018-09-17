@@ -12,12 +12,10 @@ security:
 
     role_hierarchy:
         ROLE_BOUTIQUE:          [ROLE_USER]
-        ROLE_DIRECTEUR:         [ROLE_USER, ROLE_BOUTIQUE]
-        ROLE_SUPER_DR:          [ROLE_USER, ROLE_DIRECTEUR]
-        ROLE_RETAIL_MANAGER:    [ROLE_USER, ROLE_DIRECTEUR]
-        ROLE_SUPER_RETAIL:      [ROLE_USER, ROLE_DIRECTEUR]
-        ROLE_SIEGE:             [ROLE_USER, ROLE_RETAIL_MANAGER, ROLE_SUPER_RETAIL, ROLE_SUPER_DR]
-        ROLE_ADMIN:             [ROLE_USER, ROLE_SONATA_ADMIN, ROLE_SIEGE]
+        ROLE_DIRECTEUR:         [ROLE_BOUTIQUE]
+        ROLE_RETAIL_MANAGER:    [ROLE_DIRECTEUR]
+        ROLE_SIEGE:             [ROLE_RETAIL_MANAGER]
+        ROLE_ADMIN:             [ROLE_SIEGE]
         ROLE_SUPER_ADMIN:       [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH, ROLE_SIEGE]
 
     firewalls:
@@ -76,4 +74,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+        # For ElFinder CKEditor
+        - { path: ^/efconnect, role: ROLE_USER }
+        - { path: ^/elfinder, role: ROLE_USER }
         # - { path: ^/profile, roles: ROLE_USER }

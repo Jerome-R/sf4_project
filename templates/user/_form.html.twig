@@ -10,5 +10,7 @@
 
  	{% include '/share/admin/_admin_form_input.html.twig' with {'type' : 'repeat', 'field': 'plainPassword', 'icon' : 'fa-lock', 'icon2' : 'fa-eye'} %}
 
+ 	<button type="submit">{{button_label}}</button>
+
  </fieldset>
  {{ form_end(form) }}

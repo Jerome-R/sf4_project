@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ORM\Table(name="app_users")
+ * @ORM\Table(schema="symfony",name="symfony.app_users")
  * @UniqueEntity(fields="email", message="user.email.unique")
  * @UniqueEntity(fields="username", message="user.username.unique")
  * @ORM\HasLifecycleCallbacks()
@@ -55,10 +55,10 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="string", length=50, unique=true)
      * @Assert\Length(
-     *      min = 2,
-     *      max = 50,
-     *      minMessage = "The username must contain at least 2 caracters",
-     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     *     min = 2,
+     *     max = 50,
+     *     minMessage = "The username must contain at least 2 caracters",
+     *     maxMessage = "Your first name cannot be longer than {{ limit }} characters"
      * )
      */
     private $username;
@@ -74,19 +74,19 @@ class User implements UserInterface, \Serializable
      */
     private $email;
 
-     /**
-      * @Assert\Length(
-      *      min = 8,
-      *      max = 4096,
-      *      minMessage = "The password must contain at least 8 caracters",
-      *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
-      * )
-      * @Assert\Regex(
-      *     pattern       = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[_$&+,:;=?@#|'<>.^*()%!-])([-$&+,:;=?@#|'<>.^*()%!_\w]{8,4096})$/i",
-      *     htmlPattern   =  "^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[_$&+,:;=?@#|'<>.^*()%!-])([-$&+,:;=?@#|'<>.^*()%!_\w]{8,4096})$",
-      *     message       = "The password must contain at least a number, an uppercase, a lowercase and a special caracter (_$&+,:;=?@#|'<>.^*()%!-)"
-      * )
-      */
+    /**
+     * @Assert\Length(
+     *     min = 8,
+     *     max = 4096,
+     *     minMessage = "The password must contain at least 8 caracters",
+     *     maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
+     * @Assert\Regex(
+     *     pattern       = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[_$&+,:;=?@#|'<>.^*()%!-])([-$&+,:;=?@#|'<>.^*()%!_\w]{8,4096})$/i",
+     *     htmlPattern   =  "^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[_$&+,:;=?@#|'<>.^*()%!-])([-$&+,:;=?@#|'<>.^*()%!_\w]{8,4096})$",
+     *     message       = "The password must contain at least a number, an uppercase, a lowercase and a special caracter (_$&+,:;=?@#|'<>.^*()%!-)"
+     * )
+     */
     private $plainPassword;
 
     /**
@@ -152,6 +152,13 @@ class User implements UserInterface, \Serializable
      */
     private $language;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true, options={"default" : "default"})
+     */
+    private $entityManager;
+
     public function __construct() {
         $this->username = "";
         $this->email = "";
@@ -162,9 +169,10 @@ class User implements UserInterface, \Serializable
         $this->credentialExpireAt = null;
         $this->token = null;
         $this->language = 'en';
+        $this->entityManager = 'default';
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -290,6 +298,7 @@ class User implements UserInterface, \Serializable
      * Removes sensitive data from the user.
      *
      * {@inheritdoc}
+     * @ORM\PostUpdate
      */
     public function eraseCredentials(): void
     {
@@ -407,7 +416,7 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function hasRole(?string $role) : boolean
+    public function hasRole(?string $role) : bool
     {
         if( in_array($role, $this->roles) ) return true;
         else return false;

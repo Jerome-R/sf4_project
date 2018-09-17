@@ -5,51 +5,122 @@
 {% block main %}
 
     <h1>User index</h1>
+    <div class="table-responsive">
+        <table id="dataTable" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>IsActive</th>
+                    <th>LastLogin</th>
+                    <th>UpdatedAt</th>
+                    <th>CredExpireAt</th>
+                    <th>Roles</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="small">
+            {#% for user in users %}
+                <tr>
+                    <td class="align-middle">{{ user.id }}</td>
+                    <td class="align-middle">{{ user.fullName }}</td>
+                    <td class="align-middle">{{ user.username }}</td>
+                    <td class="align-middle">{{ user.email }}</td>
+                    <td class="align-middle">{{ user.isActive ? 'Yes' : 'No' }}</td>
+                    <td class="align-middle">{{ user.lastLogin ? user.lastLogin|date('Y-m-d H:i:s') : '' }}</td>
+                    <td class="align-middle">{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td class="align-middle">{{ user.credentialExpireAt ? user.credentialExpireAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td class="align-middle">{% for role in user.roles %}{{role}}{% endfor %}</td>
+                    <td class="align-middle">
+                        <div class="btn-group"> 
+                            <a class="btn btn-primary btn-sm" href="{{ path('admin_user_show', {'id': user.id}) }}"><i class="fas fa-eye"></i> show</a>
+                            <a class="btn btn-primary btn-sm" href="{{ path('admin_user_edit', {'id': user.id}) }}"><i class="fas fa-edit"></i> edit</a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="10">no matching records found</td>
+                </tr>
+            {% endfor %#}
+            </tbody>
+        </table>
+    </div>
 
-    <table class="table table-hover table-responsive">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>FullName</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>IsActive</th>
-                <th>LastLogin</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>CrExpireAt</th>
-                <th>Roles</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td class="align-middle">{{ user.id }}</td>
-                <td class="align-middle">{{ user.fullName }}</td>
-                <td class="align-middle">{{ user.username }}</td>
-                <td class="align-middle">{{ user.email }}</td>
-                <td class="align-middle">{{ user.isActive ? 'Yes' : 'No' }}</td>
-                <td class="align-middle">{{ user.lastLogin ? user.lastLogin|date('Y-m-d H:i:s') : '' }}</td>
-                <td class="align-middle">{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td class="align-middle">{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td class="align-middle">{{ user.credentialExpireAt ? user.credentialExpireAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td class="align-middle">{% for role in user.roles %}{{role}}{% endfor %}</td>
-                <td class="align-middle">
-                    <div class="btn-group"> 
-                        <a class="btn btn-info btn-sm" href="{{ path('admin_user_show', {'id': user.id}) }}"><i class="fas fa-eye"></i> show</a>
-                        <a class="btn btn-info btn-sm" href="{{ path('admin_user_edit', {'id': user.id}) }}"><i class="fas fa-edit"></i> edit</a>
-                    </div>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="13">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a class="btn btn-success" href="{{ path('admin_user_new') }}" role="button"><i class="fas fa-plus"></i> Create new</a>
+    <a class="btn btn-primary" href="{{ path('admin_user_new') }}" role="button"><i class="fas fa-plus"></i> Create new</a>
     
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+
+        var table = $('#dataTable').DataTable(
+            {   
+
+                dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-5'B><'col-sm-12 col-md-7'p>>" +
+                    "<'row'<'col-sm-12 col-md-5 py-2'i>>",
+                /*'Bfrtip',*/
+                buttons: [
+                    'copyHtml5',
+                    'excel',
+                    'csvHtml5',
+                    'pdf',
+                ],
+                // Set Ajax request                
+                serverSide: false,//true : loads only entries of current page, false load all
+                deferRender: true,
+                processing: true, 
+                //data: {#{ jsonContent|raw }#},
+                ajax:  {
+                    url: "/datatable/user/user_ajax",
+                    /*dataSrc: 'data',
+                    data: function ( d ) {
+                        //d.test = "myValue";//set data send via ajax request
+                        // d.custom = $('#myInput').val();
+                        // etc
+                    }*/
+                },
+                /*columns: [
+                    {"data": 0},{"data": 1},{"data": 2},{"data": 3},{"data": 4},{"data": 5},{"data": 6},{"data": 7},{"data": 8},
+                ],*/
+                paging:   true,           // Activer la pagination
+                displayLength: 2,         // Nombre d'éléments à afficher
+                displayStart: 0,          // Page de départ
+                info:     true,           // Affichage des informations
+                lengthMenu: [[ 1,2,3,-1], [ 1,2,3,"All"]],
+                order: [[ 1, "asc" ]],   // Default order by
+                language: {               // Traduction
+                    processing:     "Traitement en cours...",
+                    search:         "Rechercher :",
+                    lengthMenu:     "Afficher _MENU_ éléments",
+                    info:           "Affichage des éléments _START_ à _END_ sur _TOTAL_ éléments",
+                    infoEmpty:      "Auncun élément à afficher",
+                    infoFiltered:   "(filtré de _MAX_ éléments au total)",
+                    infoPostFix:    "",
+                    loadingRecords: "Chargement en cours...",
+                    zeroRecords:    "Aucun élément à afficher",
+                    emptyTable:     "Aucune donnée disponible dans le tableau",
+                    paginate: {
+                        first:      "Premier",
+                        previous:   "Précédent",
+                        next:       "Suivant",
+                        last:       "Dernier"
+                    },
+
+                    aria: {
+                        sortAscending:  " : activer pour trier la colonne par ordre croissant",
+                        sortDescending: " : activer pour trier la colonne par ordre décroissant"
+                    },
+                },
+                columnDefs: [
+                    { searchable: false, targets: [4,5,6,7] }
+                ],
+            }
+        );
+
+    </script>
 {% endblock %}

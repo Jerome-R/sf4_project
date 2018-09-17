@@ -5,7 +5,7 @@
     <title>{% block title %}Symfony4 Project!{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
     {% endblock %}
     
@@ -34,11 +34,13 @@
                     </nav>
                 </aside>
             {% endif %}
-            <main  id="{% block main_id %}{% endblock %}" class="{% block main_class %}{% endblock %} col-md-10 col-xs-12 bg-faded py-3 pl-4 h-100 ml-md-auto">
+            <main  id="{% block main_id %}{% endblock %}" class="{% block main_class %}{% endblock %} col-md-10 col-xs-12 bg-faded py-3 px-5 h-100 ml-md-auto">
                 {% block main %}
                 {% endblock %}
             </main>
         </div>
     </div>
+    {% block javascript %}
+    {% endblock %}
 </body>
 </html>

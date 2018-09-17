@@ -1,5 +1,4 @@
-imports:
-    - { resource: parameters.yaml }
+# For external vaiables parameters, cf. to the .env file
 
 framework:
     secret: '%env(APP_SECRET)%'

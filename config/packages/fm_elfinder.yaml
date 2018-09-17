@@ -1,0 +1,49 @@
+# If you have configured your instance with /uploads path, you can provide an additional folder as a home folder
+# (e.g. for a multi-users application) when accessing to the instance URL :
+
+# /elfinder/{instance}/{homeFolder} or /efconnect/{instance}/{homeFolder}
+
+# For example, accessing to /elfinder/acmeInstance/bob URL will open up elfinder
+# with /uploads/bob as root directory which only contains Bob's files.
+
+# Then, accessing to /elfinder/acmeInstance/alice URL will re-use your instance, but open up elfinder
+# with /uploads/alice folder as root directory, containing only Alice's files.
+
+# To use this feature, you must provide the instance name in the URL,
+# and of course be sure to set proper write/read permissions on home folders.
+
+# add "component-dir": "public/assets" in config in composer.json
+
+fm_elfinder:
+    instances:
+        default:
+            #locale: '%locale%' # defaults to current request locale - disable if locale in url with prefix /{language} in routing.yaml
+            editor: ckeditor # other options are tinymce, tinymce4, fm_tinymce, form, simple, custom
+            #editor_template: custom template for your editor # default null
+            #path_prefix: / # for setting custom assets path prefix, useful for non vhost configurations, i.e. http://127.0.0.1/mysite/      
+            #fullscreen: true|false # default is true, applies to simple and ckeditor editors
+            #theme: smoothness # jquery theme, default is 'smoothness'
+            include_assets: true
+            relative_path: true
+            #assets_path: /assets
+            #visible_mime_types: ['image/png', 'image/jpg', 'image/jpeg'] # only show these mime types, defaults to show all
+            connector:
+                roots:
+                    uploads:
+                        #show_hidden: true|false # defaults to false, hides dotfiles
+                        driver: LocalFileSystem
+                        path: uploads # 
+                        # List of all MIME Types : https://developer.mozilla.org/fr/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif']
+                        upload_deny: ['all']
+                        upload_max_size: 2M # also file upload sizes restricted in php.ini
+                        #attributes: example of setting attributes permission
+                        #    - { pattern: '/(.*?)/', read: true, write: false, locked: true }
+                    #ftp_test:
+                    #    driver: FTP
+                    #    ftp_settings:
+                    #        host: '188.165.234.228'
+                    #        user: clarinsus
+                    #        password: Cl@1iN2cl@17
+                    #        path: ftp
+

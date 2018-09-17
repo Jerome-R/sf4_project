@@ -12,17 +12,18 @@ doctrine:
         connections:
              # A collection of different named connections (e.g. default, conn2, etc)
             default:
-                dbname:               "%database_name%"
-                host:                 "%database_host%"
-                port:                 "%database_port%"
-                user:                 "%database_user%"
-                password:             "%database_password%"
+                #dbname:               "%database_name%"
+                #host:                 "%database_host%"
+                #port:                 "%database_port%"
+                #user:                 "%database_user%"
+                #password:             "%database_password%"
                 # charset of the database
-                charset:              utf8mb4
+                #charset:              utf8mb4
+                charset:              UTF8
                 # charset and collation of the tables. Not inherited from database
-                default_table_options:
-                    charset:          utf8mb4
-                    collate:          utf8mb4_unicode_ci
+                #default_table_options:
+                    #charset:          utf8mb4
+                    #collate:          utf8mb4_unicode_ci
                 #path:                 ~
                 #memory:               ~
                 # The unix socket to use for MySQL
@@ -39,12 +40,17 @@ doctrine:
                 #pooled:               ~
                 # Configuring MultipleActiveResultSets for the pdo_sqlsrv driver
                 #MultipleActiveResultSets:  ~
-                driver:               pdo_mysql
+                #driver:               pdo_mysql
+                driver:               pdo_pgsql
+                #driver_class:         '@App\DBAL\SymfonyPostgresDriver'
+                #options:
+                    #search_path: symfony
                 #platform_service:     ~
                 # the version of your database engine
                 server_version:       '5.7'
                 # if the url option is specified, it will override the above config
-                #url: '%env(resolve:DATABASE_URL)%'
+                #specified in .env file via dotenv Component
+                url: '%env(resolve:DATABASE_URL)%'
                 # when true, queries are logged to a 'doctrine' monolog channel
                 #logging:              '%kernel.debug%'
                 #profiling:            '%kernel.debug%'
@@ -62,12 +68,24 @@ doctrine:
     orm:
         default_entity_manager:  default
         auto_generate_proxy_classes: '%kernel.debug%'
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
-        mappings:
-            App:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+        #mappings:
+        #    App:
+        #        is_bundle: false
+        #        type: annotation
+        #        dir: '%kernel.project_dir%/src/Entity'
+        #        prefix: 'App\Entity'
+        #        alias: App
+        entity_managers:
+            default:
+                connection: default
+                # Allow underscore naming strategy ie: $firstName var in Entity file will become first_name in Database column name
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                auto_mapping: true
+                mappings:
+                    App:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/Entity'
+                        prefix: 'App\Entity'
+                        alias: App
+

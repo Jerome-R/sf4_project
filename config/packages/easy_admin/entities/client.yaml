@@ -1,0 +1,38 @@
+# This file sets the configuration of the 'Category' entity.
+#
+# NOTE: this demo application splits the backend configuration into several
+# small files for educational purposes. In your application you can put the
+# entire backend configuration in just one file.
+#
+# The configuration options are explained in detail in the bundle documentation,
+# which is published at https://github.com/javiereguiluz/EasyAdminBundle
+easy_admin:
+    entities:
+        Client:
+            class: App\Entity\Client
+            label: 'Clients'
+            list:
+                title: 'Client'
+                actions:
+                    - { name: 'show', label: '', icon: 'search' }
+                    - { name: 'edit', label: '', icon: 'edit' }
+                    - { name: 'delete', label: '', icon: 'trash' }
+                fields:
+                    - 'id'
+                    - { property: 'nom', label: 'Nom' }
+                    - { property: 'prenom', label: 'Prénom' }
+            show:
+                fields:
+                    - 'id'
+                    - { property: 'nom', label: 'Nom', css_class: 'large' }
+                    - { property: 'prenom', label: 'Prénom' }
+                    - 'products'
+            form:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-4' }
+                    - { property: 'nom', label: 'Label', css_class: 'large' }
+                    - { property: 'prenom', label: 'Prénom' }
+                    # With Symfony 4 ckeditor type from IvoryCKEditor is not compatible instead use FOS\CKEditorBundle\Form\Type\CKEditorType
+                    - { property: 'description', label: 'Description', type: 'FOS\CKEditorBundle\Form\Type\CKEditorType' }
+                    # if you want to add products when creating categories, add the 'by_reference' option
+                    # - { property: 'products', type_options: { by_reference: false } }

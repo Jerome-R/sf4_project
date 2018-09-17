@@ -57,6 +57,19 @@ services:
         arguments:
             $validator: '@Symfony\Component\Validator\Validator\ValidatorInterface'
             $random_string: '@App\Service\RandomString'
+            #$dt_query: '@App\Service\DataTablesQuery'
+            #$db_host: '%database_host%'
+            #$db_name: '%database_name%'
+            #$db_user: '%database_user%'
+            #$db_password: '%database_password%'
+            $db_host: '%env(resolve:db_host)%'
+            $db_name: '%env(resolve:db_name)%'
+            $db_user: '%env(resolve:db_user)%'
+            $db_password: '%env(resolve:db_password)%'
+
+    App\Controller\AdminController:
+        arguments:
+            $passwordEncoder: '@Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface'
 
     App\Form\User1Type:
         arguments:
@@ -64,14 +77,35 @@ services:
 
     App\Service\MailBuilder:
         arguments:
-            $smtp_host: '%smtp_host%'
-            $smtp_user: '%smtp_user%'
-            $smtp_password: '%smtp_password%'
-            $smtp_port: '%smtp_port%'
-            $smtp_encrypt: '%smtp_encrypt%'
+            $smtp_host: '%env(smtp_host)%'
+            $smtp_user: '%env(smtp_user)%'
+            $smtp_password: '%env(smtp_password)%'
+            $smtp_port: '%env(smtp_port)%'
+            $smtp_encrypt: '%env(smtp_encrypt)%'
+
+    App\Service\PdoService:
+        arguments:
+            $db_host: '%env(resolve:db_host)%'
+            $db_name: '%env(resolve:db_name)%'
+            $db_user: '%env(resolve:db_user)%'
+            $db_password: '%env(resolve:db_password)%'
+
+    #App\Service\DataTablesQuery:
+        #arguments:
+            #$pdo: '@App\Service\PdoService'
+            #$mail_builder: '@App\Service\MailBuilder'
+
+    App\Service\SSP:
+        arguments:
+
 
     App\Service\RandomString:
         arguments:
+
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

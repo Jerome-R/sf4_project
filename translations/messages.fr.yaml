@@ -16,3 +16,7 @@ action.create_account: Créer un compte
 action.delete.confirm: Êtes vous sur de vouloir supprimer l\'objet ?
 
 homepage.text: Ceci est la page d'accueil
+
+title.show: Voir
+title.edit: Éditer
+title.delete: Supprimer

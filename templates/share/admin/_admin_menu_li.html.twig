@@ -27,7 +27,7 @@
     <div class="collapse {% if app.request.get('_route') in admin_user_routes %}show{% endif %}" id="{{sub_menu_id}}">
         <ul class="flex-md-column flex-row navbar-nav justify-content-around">
             <li class="nav-item">
-                <a class="nav-link px-xs-2 px-md-4 {% if app.request.get('_route') == admin_user_routes2 %}active{% endif %}" href="{{ path(admin_user_routes2) }}"><i class="far fa-folder-open fa-fw"></i> List</a>
+                <a class="nav-link px-xs-2 px-md-4 {% if app.request.get('_route') == admin_user_routes2 %}active{% endif %}" href="{{ path(admin_user_routes2) }}"><i class="fa fa-list fa-fw"></i> List</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link px-xs-2 px-md-4 {% if app.request.get('_route') == admin_user_routes3 %}active{% endif %}" href="{{ path(admin_user_routes3) }}"><i class="far fa-file-alt fa-fw"></i> New</a>

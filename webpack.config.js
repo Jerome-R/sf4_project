@@ -33,3 +33,11 @@ Encore
 ;
 
 module.exports = Encore.getWebpackConfig();
+
+var config = Encore.getWebpackConfig();
+config.node = { 
+    console: false,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty' };
+module.exports = config;

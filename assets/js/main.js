@@ -4,8 +4,23 @@
 // require the JavaScript node module
 // add window. to be be able to use libraries
 window.$ = window.jQuery = require('jquery');
+
 window.moment = require('moment');
+
+var JSZip = require("jszip");
+var pdfMake = require('pdfmake/build/pdfmake.js');
+var pdfFonts = require('pdfmake/build/vfs_fonts.js');
+pdfMake.vfs = pdfFonts.pdfMake.vfs; 
+
 require('bootstrap');
+require( 'datatables.net-bs4' );
+require( 'datatables.net-buttons-bs4' );
+
+require( 'datatables.net-buttons/js/buttons.colVis.js' );
+require( 'datatables.net-buttons/js/buttons.flash.js' );
+require( 'datatables.net-buttons/js/buttons.html5.js' );
+require( 'datatables.net-buttons/js/buttons.print.js' );
+
 
 // require the JavaScript assets module
 require('./temporusdominus.js');

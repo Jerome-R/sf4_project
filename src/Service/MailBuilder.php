@@ -46,38 +46,38 @@ class MailBuilder
     {
         $message = new \Swift_Message();
         $message
-        ->setSubject($options['objet'])
-        ->setFrom($options['from'])
-        ->setReplyTo($options['replyTo'])
-        ->setTo($options['to'])
-        //->setReturnPath("")
-        ->setBody($options['html'],'text/html')
-        /*
-        $this->renderView(
-        // templates/emails/registration.html.twig
-        'emails/registration.html.twig',
-        array('name' => $name)
-    ),
-    */
-    ->addPart($options['text'],'text/plain')
-    ;
+            ->setSubject($options['objet'])
+            ->setFrom($options['from'])
+            ->setReplyTo($options['replyTo'])
+            ->setTo($options['to'])
+            //->setReturnPath("")
+            ->setBody($options['html'],'text/html')
+            /*
+            $this->renderView(
+            // templates/emails/registration.html.twig
+            'emails/registration.html.twig',
+            array('name' => $name)
+            ),
+            */
+            ->addPart($options['text'],'text/plain')
+        ;
 
-    //if($options['idCampaign'] != null && $options['trackingId'] != null){
-    //    $headers = $message->getHeaders();
-        /*$headers->addPathHeader('X-Abuse-Reports-To', 'complaint@actions-pdv-l.fr');
-        $headers->addPathHeader('Your-Header-Name', 'person@example.org');
-        X-Abuse-Reports-To - abuse
-        X-CSA-complaints - whitelist
-        $headers->addTextHeader('X-Mine', 'something here');
-        $headers->addParameterizedHeader(
-        'Header-Name', ' header value'
-        array('foo' => 'bar', 'foo2' => 'bar2')
-        );
-        var_dump($headers->get('Return-Path'));
-        */
-    //    $headers->addTextHeader('X-CampaignId', $options['idCampaign']);
-    //    $headers->addTextHeader('X-TrackingId', $options['trackingId']);
-    //}
+        //if($options['idCampaign'] != null && $options['trackingId'] != null){
+        //    $headers = $message->getHeaders();
+            /*$headers->addPathHeader('X-Abuse-Reports-To', 'complaint@actions-pdv-l.fr');
+            $headers->addPathHeader('Your-Header-Name', 'person@example.org');
+            X-Abuse-Reports-To - abuse
+            X-CSA-complaints - whitelist
+            $headers->addTextHeader('X-Mine', 'something here');
+            $headers->addParameterizedHeader(
+            'Header-Name', ' header value'
+            array('foo' => 'bar', 'foo2' => 'bar2')
+            );
+            var_dump($headers->get('Return-Path'));
+            */
+        //    $headers->addTextHeader('X-CampaignId', $options['idCampaign']);
+        //    $headers->addTextHeader('X-TrackingId', $options['trackingId']);
+        //}
 
     return $message;
     }

@@ -13,17 +13,17 @@
     #path: /logout
     #controller:  App\Controller\SecurityController::logout
 
-security_register:
-    path: /register
-    controller: App\Controller\SecurityController::register
+#security_register:
+    #path: /register
+    #controller: App\Controller\SecurityController::register
 
-security_two_step_validation:
-    path: /security_two_step_validation
-    controller: App\Controller\SecurityController::two_step_validation
+#security_two_step_validation:
+#    path: /security_two_step_validation
+#    controller: App\Controller\SecurityController::two_step_validation
 
-security_account_validation:
-    path: /account_validation/{id}/{token}
-    controller: App\Controller\SecurityController::account_validation
+#security_account_validation:
+#    path: /account_validation/{id}/{token}
+#    controller: App\Controller\SecurityController::account_validation
 
 #en_redirect:
     #path: /en
@@ -31,3 +31,19 @@ security_account_validation:
     #defaults:
         #path: /
         #permanent: true
+
+
+easy_admin_bundle:
+    # this is just an example; update the value of 'resource' accordingly
+    resource: 'App\Controller\AdminController'
+    type:     annotation
+    prefix:   /admin
+
+fm_elfinder:
+    resource: "@FMElfinderBundle/Resources/config/routing.yml"
+    prefix:
+        en:
+        fr: '/fr'
+        zh: '/zh'
+        it: '/it'
+        es: '/es'

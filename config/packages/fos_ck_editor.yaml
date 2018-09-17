@@ -1,0 +1,16 @@
+fos_ck_editor:
+    default_config: my_config
+    #inline: false
+    configs:
+        my_config:
+            #toolbar: [ ["Source", "-", "Save"], "/", ["Anchor"], "/", ["Maximize"] ]
+            #uiColor:                "#000000"
+            filebrowserBrowseRoute: elfinder
+            filebrowserBrowseRouteParameters: []
+                #instance: default
+                #homeFolder: 6_tom_admin
+            #extraPlugins:           "wordcount"
+        #plugins:
+            #wordcount:
+                #path:     "/bundles/mybundle/wordcount/" # with trailing slash
+                #filename: "plugin.js"

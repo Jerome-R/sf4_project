@@ -1,0 +1,42 @@
+# This file sets the configuration of the 'User' entity.
+#
+# NOTE: this demo application splits the backend configuration into several
+# small files for educational purposes. In your application you can put the
+# entire backend configuration in just one file.
+#
+# The configuration options are explained in detail in the bundle documentation,
+# which is published at https://github.com/javiereguiluz/EasyAdminBundle
+easy_admin:
+    entities:
+        User:
+            class: App\Entity\User
+            help: 'I NEED HELP !!'
+            #label: 'Utilisateur'
+            list:
+                max_results: 30
+                title: '%%entity_label%%'
+                actions:
+                    - 'new'
+                    - { name: 'show', label: '', icon: 'eye' }
+                    - { name: 'edit', label: '', icon: 'edit' }
+                    - { name: 'delete', label: '', icon: 'trash' }
+                fields:
+                    - 'id'
+                    - { property: 'isActive', label: 'Is Active', type: 'boolean'}
+                    - { property: 'username', label: 'Username' }
+                    - { property: 'email', label: 'Email' }
+                    - { property: 'roles', label: 'Roles' }
+                sort: ['id', 'ASC']
+                #dql_filter: "entity.roles = ANY ('{1,2,3}'::int[])"
+            search:
+                sort: ['id', 'DESC']
+            show:
+                fields: ['id', 'isActive', 'username', 'email']
+            form:
+                fields:
+                    - { type: 'group', label: 'Account Information', icon: 'user', css_class: 'col-sm-6' }
+                    - { property: 'username' }
+                    - { property: 'isActive', label: 'Activer le compte' }
+                    - { property: 'plainPassword', type: 'password', type_options: { required: false} }
+                    - { type: 'group', label: 'Contact Information', icon: 'envelope-o', css_class: 'col-sm-6' }
+                    - { property: 'email', type: 'email', type_options: { required: false } }

@@ -15,5 +15,8 @@ action.register: Register
 action.create_account: Create an account
 action.delete.confirm: Are you sure you want to delete this item?
 
-
 homepage.text: This is a homepage
+
+title.show: See
+title.edit: Edit
+title.delete: Delete

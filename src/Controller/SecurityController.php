@@ -96,7 +96,6 @@ class SecurityController extends AbstractController
     *
     */
     /**
-     * Login Page
      * @Route("/logout", name="security_logout")
      */
     public function logout(): void
@@ -105,8 +104,9 @@ class SecurityController extends AbstractController
     }
 
     /**
-    * Regiter page
-    */
+     * Regiter page
+     * @Route("/register", name="security_register")
+     */
     public function register(UserPasswordEncoderInterface $passwordEncoder, Request $request): Response
     {
         // 1) build the form
@@ -179,6 +179,10 @@ class SecurityController extends AbstractController
         );
     }
 
+    /**
+     * 2 step validation page
+     * @Route("/security_two_step_validation", name="security_two_step_validation")
+     */
     public function two_step_validation(): Response
     {
         return $this->render(
@@ -188,9 +192,9 @@ class SecurityController extends AbstractController
         );
     }
 
-
     /**
-    * @ParamConverter("user",  options={"mapping": {"id": "id"}})
+     * @Route("/account_validation/{id}/{token}", name="security_account_validation")
+     * @ParamConverter("user",  options={"mapping": {"id": "id"}})
     */
     public function account_validation(User $user, $token): Response
     {
