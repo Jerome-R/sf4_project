@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(schema="symfony",name="symfony.app_actions")
  * @UniqueEntity(fields="code", message="action.code.unique")
  * @ORM\HasLifecycleCallbacks()
- * @Gedmo\SoftDeleteable(fieldName="deteted_at", timeAware=false )
+ * @Gedmo\SoftDeleteable(fieldName="deleted_at", timeAware=false )
  */
 class Action
 {
@@ -82,7 +82,6 @@ class Action
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Gedmo\Timestampable(on="update")
      */
     private $deleted_at;
 
@@ -219,6 +218,18 @@ class Action
     public function setModifiedAt(\DateTimeInterface $modified_at): self
     {
         $this->modified_at = $modified_at;
+
+        return $this;
+    }
+
+    public function getDeletedAt(): ?\DateTimeInterface
+    {
+        return $this->deleted_at;
+    }
+
+    public function setDeletedAt(\DateTimeInterface $deleted_at): self
+    {
+        $this->modified_at = $deleted_at;
 
         return $this;
     }

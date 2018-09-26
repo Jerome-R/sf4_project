@@ -14,3 +14,4 @@ easy_admin:
             #- { label: 'menu.dashboard', route: 'app_admin_dashbord', icon: 'github', default: true }
             - { label: 'menu.user', entity: 'User', icon: 'user', params: { }, default: true  }
             - { label: 'menu.client', entity: 'Client', icon: 'users' }
+            - { label: 'menu.action', entity: 'Action', icon: 'bullhorn' }

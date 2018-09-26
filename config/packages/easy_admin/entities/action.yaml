@@ -1,0 +1,51 @@
+# This file sets the configuration of the 'Category' entity.
+#
+# NOTE: this demo application splits the backend configuration into several
+# small files for educational purposes. In your application you can put the
+# entire backend configuration in just one file.
+#
+# The configuration options are explained in detail in the bundle documentation,
+# which is published at https://github.com/javiereguiluz/EasyAdminBundle
+easy_admin:
+    entities:
+        Action:
+            class: App\Entity\Action
+            label: 'Actions'
+            list:
+                title: 'Action'
+                actions:
+                    - { name: 'show', label: '', icon: 'search' }
+                    - { name: 'edit', label: '', icon: 'edit' }
+                    - { name: 'delete', label: '', icon: 'trash' }
+                fields:
+                    - 'id'
+                    - { property: 'name', label: 'Nom' }
+                    - { property: 'code', label: 'Code' }
+                    - { property: 'type', label: 'Type' }
+                    - { property: 'canal', label: 'Canal' }
+                    - { property: 'status', label: 'Status' }
+                    - { property: 'start_date', label: 'Start date' }
+                    - { property: 'end_date', label: 'End date' }
+                    - { property: 'code', label: 'Code' }
+            show:
+                fields:
+                    - 'id'
+                    - { property: 'name', label: 'Nom' }
+                    - { property: 'code', label: 'Code' }
+                    - { property: 'type', label: 'Type' }
+                    - { property: 'canal', label: 'Canal' }
+                    - { property: 'status', label: 'Status' }
+                    - { property: 'start_date', label: 'Start date' }
+                    - { property: 'end_date', label: 'End date' }
+                    - { property: 'code', label: 'Code' }
+            form:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-6' }
+                    - { property: 'name', label: 'Label', css_class: 'large' }
+                    - { property: 'code', label: 'Code' }
+                    - { property: 'type', label: 'Type' }
+                    - { property: 'canal', label: 'Canal' }
+                    - { property: 'status', label: 'Status' }
+                    - { property: 'start_date', label: 'Start date' }
+                    - { property: 'end_date', label: 'End date' }
+                    - { property: 'code', label: 'Code' }
