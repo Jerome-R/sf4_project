@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(schema="symfony",name="symfony.app_actions")
  * @UniqueEntity(fields="code", message="action.code.unique")
  * @ORM\HasLifecycleCallbacks()
+ * @Gedmo\SoftDeletable(fieldName="deteted_at", timeAware=false )
  */
 class Action
 {
@@ -68,13 +69,21 @@ class Action
 
     /**
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
      */
     private $created_at;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="update")
      */
     private $modified_at;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="update")
+     */
+    private $deleted_at;
 
     public function getId(): ?int
     {
