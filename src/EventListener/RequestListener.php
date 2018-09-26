@@ -65,7 +65,13 @@ class RequestListener
         if( preg_match_all("/\/elfinder/", $this->newUrl) && !preg_match_all("/\/emails/", $this->oldUrl) ){ // && !in_array('ROLE_ADMIN', $user->getRoles()) ) {
             $pathLocale_root = preg_replace("/\/elfinder.+$/m","/elfinder", $this->newUrl);
 
-            $user_home_folder = str_replace(' ','_',$user->getId() . '_' . $user->getUsername());
+            if($user != null) {
+                $user_home_folder = str_replace(' ','_',$user->getId() . '_' . $user->getUsername());
+            }
+            else {
+                $user_home_folder = "public";
+            }
+            
             $filename = __DIR__ . '/../../public/uploads/'.$user_home_folder;
 
             if(!file_exists($filename)){
