@@ -5,13 +5,14 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ActionRepository")
  * @ORM\Table(schema="symfony",name="symfony.app_actions")
  * @UniqueEntity(fields="code", message="action.code.unique")
  * @ORM\HasLifecycleCallbacks()
- * @Gedmo\SoftDeletable(fieldName="deteted_at", timeAware=false )
+ * @Gedmo\SoftDeleteable(fieldName="deteted_at", timeAware=false )
  */
 class Action
 {
