@@ -8,7 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
- * @ORM\Table(schema="symfony",name="symfony.app_clients")
+ * @ORM\Table(name="app_clients")
  * @UniqueEntity(fields="id_client", message="client.id_client.unique")
  * @ORM\HasLifecycleCallbacks()
  */

@@ -9,10 +9,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ActionRepository")
- * @ORM\Table(schema="symfony",name="symfony.app_actions")
+ * @ORM\Table(name="app_actions")
  * @UniqueEntity(fields="code", message="action.code.unique")
  * @ORM\HasLifecycleCallbacks()
  * @Gedmo\SoftDeleteable(fieldName="deleted_at", timeAware=false )
+ * @Gedmo\Loggable
  */
 class Action
 {
@@ -25,6 +26,7 @@ class Action
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Gedmo\Versioned
      */
     private $name;
 
@@ -45,11 +47,13 @@ class Action
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Gedmo\Blameable(on="create")
      */
     private $author;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Gedmo\Blameable(on="update")
      */
     private $edited_by;
 

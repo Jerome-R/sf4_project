@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ORM\Table(schema="symfony",name="symfony.app_users")
+ * @ORM\Table(name="app_users")
  * @UniqueEntity(fields="email", message="user.email.unique")
  * @UniqueEntity(fields="username", message="user.username.unique")
  * @ORM\HasLifecycleCallbacks()

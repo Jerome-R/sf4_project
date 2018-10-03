@@ -38,10 +38,14 @@ easy_admin:
                     - { property: 'start_date', label: 'Start date' }
                     - { property: 'end_date', label: 'End date' }
                     - { property: 'code', label: 'Code' }
+                    - { property: 'author', label: 'author' }
+                    - { property: 'edited_by', label: 'edited_by' }
+                    - { property: 'created_at', label: 'created_at' }
+                    - { property: 'modified_at', label: 'modified_at' }
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-6' }
-                    - { property: 'name', label: 'Label', css_class: 'large' }
+                    - { property: 'name', label: 'Name', css_class: 'large' }
                     - { property: 'code', label: 'Code' }
                     - { property: 'type', label: 'Type' }
                     - { property: 'canal', label: 'Canal' }
